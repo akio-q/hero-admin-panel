@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import { useHttp } from "../../hooks/http.hook";
 import { addHero } from "../../actions";
 import { v4 as uuidv4 } from 'uuid';
+import { useState } from "react";
 
 // Задача для этого компонента:
 // Реализовать создание нового героя с введенными данными. Он должен попадать
@@ -14,21 +15,34 @@ import { v4 as uuidv4 } from 'uuid';
 // данных из фильтров
 
 const HeroesAddForm = () => {
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
+    const [element, setElement] = useState('');
+ 
     const dispatch = useDispatch();
     const {request} = useHttp();
-    let hero = {id: uuidv4()};
 
-    const addNewHero = (e) => {
+    const onSubmitHandler = (e) => {
         e.preventDefault();
 
-        dispatch(addHero(hero));
-        request("http://localhost:3001/heroes", 'POST', JSON.stringify(hero));
+        const newHero = {
+            id: uuidv4(),
+            name,
+            description,
+            element
+        };
 
-        hero = {id: uuidv4()};
+        request("http://localhost:3001/heroes", 'POST', JSON.stringify(newHero))
+            .then(dispatch(addHero(newHero)))
+            .catch(err => console.log(err));
+
+        setName('');
+        setDescription('');
+        setElement('');
     }
 
     return (
-        <form className="border p-4 shadow-lg rounded">
+        <form className="border p-4 shadow-lg rounded" onSubmit={onSubmitHandler}>
             <div className="mb-3">
                 <label htmlFor="name" className="form-label fs-4">New character's name</label>
                 <input 
@@ -37,7 +51,8 @@ const HeroesAddForm = () => {
                     name="name" 
                     className="form-control" 
                     id="name" 
-                    onChange={e => hero.name = e.target.value}
+                    value={name}
+                    onChange={e => setName(e.target.value)}
                     placeholder="What is my name?"/>
             </div>
 
@@ -48,7 +63,8 @@ const HeroesAddForm = () => {
                     name="text" 
                     className="form-control" 
                     id="text" 
-                    onChange={e => hero.description = e.target.value}
+                    value={description}
+                    onChange={e => setDescription(e.target.value)}
                     placeholder="What can I do?"
                     style={{"height": '130px'}}/>
             </div>
@@ -60,7 +76,8 @@ const HeroesAddForm = () => {
                     className="form-select" 
                     id="element" 
                     name="element"
-                    onChange={e => hero.element = e.target.value}>
+                    value={element}
+                    onChange={e => setElement(e.target.value)}>
                     <option >My elemental power is...</option>
                     <option 
                         value="fire">Fire</option>
@@ -75,8 +92,7 @@ const HeroesAddForm = () => {
 
             <button 
                 type="submit" 
-                className="btn btn-primary"
-                onClick={addNewHero}>Create</button>
+                className="btn btn-primary">Create</button>
         </form>
     )
 }
