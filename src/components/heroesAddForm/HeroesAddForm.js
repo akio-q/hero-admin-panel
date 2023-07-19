@@ -8,7 +8,7 @@
 // Элементы <option></option> желательно сформировать на базе
 // данных из фильтров
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHttp } from "../../hooks/http.hook";
 import { addHero } from "../../actions";
 import { v4 as uuidv4 } from 'uuid';
@@ -19,6 +19,7 @@ const HeroesAddForm = () => {
     const [description, setDescription] = useState('');
     const [element, setElement] = useState('');
  
+    const {filters, filtersLoadingStatus} = useSelector(state => state);
     const dispatch = useDispatch();
     const {request} = useHttp();
 
@@ -39,6 +40,22 @@ const HeroesAddForm = () => {
         setName('');
         setDescription('');
         setElement('');
+    }
+
+    const renderOptions = (filters, status) => {
+        if (status === "loading") {
+            return <option>Loading elements</option>
+        } else if (status === "error") {
+            return <option>Loading error</option>
+        }
+
+        if (filters && filters.length > 0) {
+            return filters.map(({name, label}) => {
+                if (name === 'all') return;
+
+                return <option key={name} value={name}>{label}</option>
+            });
+        }
     }
 
     return (
@@ -79,14 +96,7 @@ const HeroesAddForm = () => {
                     value={element}
                     onChange={e => setElement(e.target.value)}>
                     <option >My elemental power is...</option>
-                    <option 
-                        value="fire">Fire</option>
-                    <option 
-                        value="water">Water</option>
-                    <option 
-                        value="wind">Wind</option>
-                    <option 
-                        value="earth">Earth</option>
+                    {renderOptions(filters, filtersLoadingStatus)}
                 </select>
             </div>
 
