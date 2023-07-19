@@ -1,5 +1,11 @@
+import { useDispatch } from "react-redux";
+import { deleteHero } from "../../actions";
+import { useHttp } from "../../hooks/http.hook";
 
-const HeroesListItem = ({name, description, element}) => {
+const HeroesListItem = ({id, name, description, element}) => {
+    const dispatch = useDispatch();
+    const {request} = useHttp();
+    
     let elementClassName;
 
     switch (element) {
@@ -19,6 +25,11 @@ const HeroesListItem = ({name, description, element}) => {
             elementClassName = 'bg-warning bg-gradient';
     }
 
+    const deleteItem = () => {
+        dispatch(deleteHero(id));
+        request(`http://localhost:3001/heroes/${id}`, 'DELETE');
+    }
+
     return (
         <li 
             className={`card flex-row mb-4 shadow-lg text-white ${elementClassName}`}>
@@ -35,6 +46,7 @@ const HeroesListItem = ({name, description, element}) => {
                 <button 
                     type="button" 
                     className="btn-close btn-close"
+                    onClick={deleteItem}
                     aria-label="Close"></button>
             </span>
         </li>
