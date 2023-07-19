@@ -1,9 +1,3 @@
-import { useDispatch } from "react-redux";
-import { useHttp } from "../../hooks/http.hook";
-import { addHero } from "../../actions";
-import { v4 as uuidv4 } from 'uuid';
-import { useState } from "react";
-
 // Задача для этого компонента:
 // Реализовать создание нового героя с введенными данными. Он должен попадать
 // в общее состояние и отображаться в списке + фильтроваться
@@ -13,6 +7,12 @@ import { useState } from "react";
 // Дополнительно:
 // Элементы <option></option> желательно сформировать на базе
 // данных из фильтров
+
+import { useDispatch } from "react-redux";
+import { useHttp } from "../../hooks/http.hook";
+import { addHero } from "../../actions";
+import { v4 as uuidv4 } from 'uuid';
+import { useState } from "react";
 
 const HeroesAddForm = () => {
     const [name, setName] = useState('');
