@@ -50,3 +50,10 @@ export const addHero = (hero) => {
         payload: hero
     }
 }
+
+export const filterHeroes = (element) => {
+    return {
+        type: 'FILTER_HEROES',
+        payload: element
+    }
+}

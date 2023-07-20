@@ -7,7 +7,7 @@
 
 import { useSelector, useDispatch } from "react-redux";
 import { useHttp } from "../../hooks/http.hook";
-import { filtersFetching, filtersFetched, filtersFetchingError } from "../../actions";
+import { filtersFetching, filtersFetched, filtersFetchingError, filterHeroes } from "../../actions";
 import { useEffect } from "react";
 import Spinner from '../spinner/Spinner'
 
@@ -30,6 +30,10 @@ const HeroesFilters = () => {
         return <h5 className="text-center mt-5">Loading error</h5>
     }
 
+    const filterItems = (elem) => {
+        dispatch(filterHeroes(elem));
+    }
+
     const renderFilters = (arr) => {
         if (arr.length === 0) {
             return <h5 className="text-center mt-5">Filters are not found</h5>
@@ -40,6 +44,7 @@ const HeroesFilters = () => {
                         key={name} 
                         id={name}
                         className={`btn ${className}`}
+                        onClick={() => filterItems(name)}
                         >{label}</button>
         })
     }
