@@ -51,9 +51,9 @@ export const addHero = (hero) => {
     }
 }
 
-export const filterHeroes = (element) => {
+export const activeFilterChanged = (element) => {
     return {
-        type: 'FILTER_HEROES',
+        type: 'ACTIVE_FILTER_CHANGED',
         payload: element
     }
 }
