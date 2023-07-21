@@ -16,10 +16,10 @@ import './heroesList.scss';
 
 const HeroesList = () => {
     const filteredHeroes = useSelector(state => {
-        if (state.activeFilter === 'all') {
-            return state.heroes;
+        if (state.filters.activeFilter === 'all') {
+            return state.heroes.heroes;
         } else {
-            return state.heroes.filter(hero => hero.element === state.activeFilter)
+            return state.heroes.heroes.filter(hero => hero.element === state.filters.activeFilter)
         }
     })
     const heroesLoadingStatus = useSelector(state => state.heroesLoadingStatus);
