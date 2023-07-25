@@ -10,11 +10,6 @@ import Spinner from '../spinner/Spinner';
 
 import './heroesList.scss';
 
-// Задача для этого компонента:
-// При клике на "крестик" идет удаление персонажа из общего состояния
-// Усложненная задача:
-// Удаление идет и с json файла при помощи метода DELETE
-
 const HeroesList = () => {
     const filteredHeroesSelector = createSelector(
         state => state.heroes.heroes,
