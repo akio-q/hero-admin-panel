@@ -3,7 +3,7 @@ import { useHttp } from "../../hooks/http.hook";
 import { useEffect } from "react";
 import classNames from 'classnames';
 
-import { filtersFetching, filtersFetched, filtersFetchingError, activeFilterChanged } from "../../actions";
+import { fetchFitlers, activeFilterChanged } from "../../actions";
 import Spinner from '../spinner/Spinner'
 
 const HeroesFilters = () => {
@@ -12,11 +12,7 @@ const HeroesFilters = () => {
     const {request} = useHttp();
 
     useEffect(() => {
-        dispatch(filtersFetching());
-
-        request("http://localhost:3001/filters")
-            .then(data => dispatch(filtersFetched(data)))
-            .catch(() => dispatch(filtersFetchingError()));
+        dispatch(fetchFitlers(request));
     }, [])
 
     if (filtersLoadingStatus === "loading") {
