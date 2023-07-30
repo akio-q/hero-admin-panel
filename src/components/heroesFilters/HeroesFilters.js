@@ -3,7 +3,8 @@ import { useHttp } from "../../hooks/http.hook";
 import { useEffect } from "react";
 import classNames from 'classnames';
 
-import { fetchFitlers, activeFilterChanged } from "../../actions";
+import { fetchFitlers } from "../../actions";
+import { activeFilterChanged } from "./filtersSlice";
 import Spinner from '../spinner/Spinner'
 
 const HeroesFilters = () => {
