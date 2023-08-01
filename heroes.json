@@ -17,30 +17,41 @@
       "name": "Sea hero",
       "description": "Like Aquaman, but not from DC",
       "element": "water"
+    },
+    {
+      "id": "a96c15a8-92d8-48c2-96ac-a2b72d967938",
+      "name": "sad",
+      "description": "dsa",
+      "element": "water"
     }
   ],
   "filters": [
     {
+      "id": "all",
       "name": "all",
       "label": "All",
       "className": "btn-outline-dark"
     },
     {
+      "id": "fire",
       "name": "fire",
       "label": "Fire",
       "className": "btn-danger"
     },
     {
+      "id": "water",
       "name": "water",
       "label": "Water",
       "className": "btn-primary"
     },
     {
+      "id": "wind",
       "name": "wind",
       "label": "Wind",
       "className": "btn-success"
     },
     {
+      "id": "earth",
       "name": "earth",
       "label": "Earth",
       "className": "btn-secondary"
