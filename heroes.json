@@ -17,12 +17,6 @@
       "name": "Sea hero",
       "description": "Like Aquaman, but not from DC",
       "element": "water"
-    },
-    {
-      "id": "a96c15a8-92d8-48c2-96ac-a2b72d967938",
-      "name": "sad",
-      "description": "dsa",
-      "element": "water"
     }
   ],
   "filters": [
